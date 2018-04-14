@@ -1,0 +1,18 @@
+sudo: false
+language: ruby
+services:
+  - docker
+before_install:
+  - git clone --depth 1 https://github.com/seiferma/Docker_BuildUtils.git /tmp/BuildUtils
+  - . /tmp/BuildUtils/travisSetup.sh
+script:
+  - travisBuildDockerhub.sh
+deploy:
+  provider: script
+  script: travisDeployDockerhub.sh
+  on:
+    branch: master
+env:
+  global: 
+    - IMAGE_NAME=seiferma/nextcloud
+    - secure: "JRR5bVYRhOsaAWMYp1cNtOl02cNWRjud1l0duCWF939larxQu/IRTgyjaAvVMXa2PvgjAsqvMsTVsVsUpQFTPvCup5zJ3SHSeEIGpkthSmkH8Y0lEVdlt/sInrppQL1fuGtt5C+pVTrKlyVZZfP2WBi5cFo1Unzz68J1STAB8bP9/OrI534wBsAMjD9pEuokgAb2wAsXLg/ZORPfOgnCtSEaoauWw2ZVM9U19URvMbVhwg9/Q/dtkfyRRWTqSQUtBA0MHaXalbB995PKMhr38Dkiz36VG7JIjiBmSI6tO5MVKw9sYCaXWCo1XXZHC9lHoqO0IzGhVjg9mAACVULYS3U6dQhLVEdaC8m2Czhr8ctsyIzmBTEEuuI3KuOEdUc76MWjnV33Qmbkf9M6+3SJy+glxn2/XccmDrVV3SK4Jg7J9Y/fGBkOQY/VRDeLpM4nlqbzSLzuRJCJpVVikat0R9ExgdnxBCXut4PaWxKSpBmddtx74esX+Y4yiQNc51n4H37mYHSvChwgsucilM+fWSDQVxZ9msAcO3wm5r9cOEccy3h5C9kIfsKKgP9r37TWR8ZjkC0oLaHHBpydFIxtsJsBEbyUeqLZAME424+n4nuQ+rP1ZaYfwTgIVn46QzkoVcQFoM1tyb+NE4AhPMwjEw2yLRVtnKBv1ImEbhtD8d0="
